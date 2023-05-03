@@ -1,0 +1,27 @@
+Description: Nested stack file that creates the resources for load balancer, EC2, RDS, and custom VPC.
+
+Resources:
+  CustomVPCStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://cloudformastiondd.s3.amazonaws.com/customevpc.yaml
+
+  EC2StackAWSTemplateFormatVersion: 2010-09-09
+
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://cloudformastiondd.s3.amazonaws.com/ec2.yml
+    DependsOn: CustomVPCStack
+
+  RDSStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://cloudformastiondd.s3.amazonaws.com/RDS.yml
+    DependsOn: CustomVPCStack
+
+  LoadBalancerStack:
+    Type: AWS::CloudFormation::Stack
+    Properties:
+      TemplateURL: https://cloudformastiondd.s3.amazonaws.com/loadbalancer.yml
+    DependsOn: EC2Stack
+

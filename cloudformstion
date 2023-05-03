@@ -1,0 +1,12 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Deploy CloudFormation Stack') {
+      steps {
+          sh "aws cloudformation deploy --template-file:// pipeline.yaml --stack-name my-stack --region 'us-east-1'"
+        }
+      }
+    }
+  }
+}

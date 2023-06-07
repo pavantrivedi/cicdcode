@@ -1,0 +1,16 @@
+Resources:
+  MyEC2Instance:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-053b0d53c279acc90  # Replace with the desired AMI ID
+      KeyName: demo  # Replace with your key pair name
+      SecurityGroupIds:
+        - sg-01ce5e31150681667  # Replace with your security group ID
+      UserData:
+        Fn::Base64: |
+          #!/bin/bash
+          echo "Hello, World!" > /var/www/html/index.html
+      Tags:
+        - Key: Name
+          Value: MyEC2Instance
